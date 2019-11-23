@@ -1,0 +1,1002 @@
+{
+  "__internal": {
+    "platform": {
+      "name": "Platform",
+      "description": {
+        "Windows": "Config for Windows",
+        "Linux": "Config for Linux",
+        "Mac OS": "Config for Mac OS"
+      },
+      "default": null,
+      "values": ["Windows", "Linux", "Mac OS"]
+    }
+  },
+  "core": {
+    "section": "Beyondcoin Core",
+    "description": "Basic parameters regarding Beyondcoin Core node operation.",
+    "alertnotify": {
+      "name": "Alert Notification",
+      "description": "Execute command when an alert (or long fork) is received (%s in cmd is replaced by message)",
+      "default": ""
+    },
+    "blockfilterindex": {
+      "name": "Block Filter Index",
+      "description": "Maintain an index of compact filters by block",
+      "description": {
+        "0": "Disable compact filters.",
+        "1": "Enable all compact filters.",
+        "basic": "Basic filters"
+      },
+      "default": "0",
+      "values": [
+        "Disable [0]",
+        "Enable All [1]",
+        "Basic Filters [basic]"
+      ]
+    },
+    "blocknotify": {
+      "name": "Block Notification",
+      "description": "Execute command when the best block changes (%s in cmd is replaced by block hash)",
+      "default": ""
+    },
+    "blocksdir": {
+      "name": "Block Data Storage Location",
+      "description": "Specify a non-default location to store blockchain data.",
+      "default": "$BASE/blocks"
+    },
+    "blocksonly": {
+      "name": "Blocks Only Mode",
+      "description": "Only download and relay blocks - ignore unconfirmed transaction",
+      "default": 0
+    },
+    "assumevalid": {
+      "name": "Assume Valid Chain History",
+      "description": "Assume that this block hash and its ancestors are valid. Skip their script verification (performance boost.) Set to 0 to verify all blocks. We recommend leaving value blank.",
+      "default": ""
+    },
+    "daemon": {
+      "name": "Daemon Mode",
+      "description": "Run in the background as a daemon and accept commands.",
+      "default": 0
+    },
+    "datadir": {
+      "name": "Data Storage Location",
+      "description": "Specify a non-default location to store blockchain and other data.",
+      "default": "$BASE"
+    },
+    "dbbatchsize": {
+      "name": "DB Batch Size",
+      "description": "Maximum database write batch size in bytes.",
+      "default": 16777216,
+      "min": 1024
+    },
+    "dbcache": {
+      "name": "DB Cache Size",
+      "description": "Set database cache size in megabytes; machines sync faster with a larger cache. Recommend setting as high as possible based upon machine's available RAM.",
+      "default": 450,
+      "min": 4
+    },
+    "feefilter": {
+      "name": "Fee Filter",
+      "description": "Tell peer nodes not to send transactions to you that pay less than your mempool min fee.",
+      "default": 1
+    },
+    "includeconf": {
+      "name": "Include Config File",
+      "description": "Load additional configuration file, relative to the data directory.",
+      "default": ""
+    },
+    "loadblock": {
+      "name": "Import Blocks From File",
+      "description": "Imports blocks from external blk000??.dat file on startup. This option can be set multiple times with different file values.",
+      "default": ""
+    },
+    "maxorphantx": {
+      "name": "Max Orphan Transactions",
+      "description": "Keep at most <n> unconnectable transactions in memory.",
+      "default": 100,
+      "min": 0
+    },
+    "maxmempool": {
+      "name": "Max Mempool Size",
+      "description": "Keep the transaction memory pool below <n> megabytes.",
+      "default": 300
+    },
+    "mempoolexpiry": {
+      "name": "Mempool Expiration",
+      "description": "Do not keep transactions in the mempool longer than <n> hours.",
+      "default": 336,
+      "min": 1
+    },
+    "minimumchainwork": {
+      "name": "Minimum Chain Work",
+      "description": "The (hex value) minimum amount of cumulative proof of work required.",
+      "default": "0x000000000000000000000000000000000000000000f91c579d57cad4bc5278cc"
+    },
+    "persistmempool": {
+      "name": "Persist Mempool",
+      "description": "Save the mempool on shutdown and load on restart.",
+      "default": 1
+    },
+    "blockreconstructionextratxn": {
+      "name": "Block Reconstruction Transactions",
+      "description": "Extra transactions to keep in memory for compact block reconstructions.",
+      "default": 100
+    },
+    "par": {
+      "name": "Script Verification Parallelization",
+      "description": "Set the number of script verification threads. (1 to CPU_CORES, 0 = automatic, less than 0 = leave that many cores free).",
+      "default": 0
+    },
+    "pid": {
+      "name": "PID file",
+      "description": "Specify process ID file name. Ignored for Windows.",
+      "default": "beyondcoind.pid"
+    },
+    "prune": {
+      "name": "Prune Old Blocks",
+      "description": "Reduce storage requirements by only storing most recent N MiB of block. This mode is incompatible with -txindex and -rescan. WARNING: Reverting this setting requires re-downloading the entire blockchain. (default: 0 = disable pruning blocks, 1 = allow manual pruning via RPC, greater than 550 = automatically prune blocks to stay under target size in MiB).",
+      "default": 0,
+      "min": 0
+    },
+    "reindex-chainstate": {
+      "name": "Reindex Chainstate",
+      "description": "Reindex chain state from the currently indexed blocks. WARNING: very slow!",
+      "default": 0
+    },
+    "reindex": {
+      "name": "Reindex",
+      "description": "Rebuild chain state and block index from the blk*.dat files on disk. WARNING: very slow!",
+      "default": 0
+    },
+    "sysperms": {
+      "name": "System File Permissions",
+      "description": "Create new files with system default permissions. Only effective if wallet is disabled.",
+      "default": 0
+    },
+    "txindex": {
+      "name": "Index Transactions",
+      "description": "Maintain a full transaction index, used by the getrawtransaction rpc call.",
+      "default": 0
+    }
+  },
+  "network": {
+    "section": "Networking",
+    "description": "Options for how your node interacts with other peers on the network.",
+    "addnode": {
+      "name": "Connect to Peer",
+      "description": "Add a node IP address to connect to and attempt to keep the connection open. This option can be set multiple times.",
+      "default": ""
+    },
+    "banscore": {
+      "name": "Peer Ban Threshold",
+      "description": "Threshold for disconnecting misbehaving peers.",
+      "default": 100,
+      "min": 1
+    },
+    "bantime": {
+      "name": "Peer Ban Time",
+      "description": "Number of seconds to keep misbehaving peers from reconnecting.",
+      "default": 86400,
+      "min": 1
+    },
+    "bind": {
+      "name": "Bind to IP Address",
+      "description": "Bind to given address and always listen on it. Use [host]:port notation for IPv6.",
+      "default": ""
+    },
+    "connect": {
+      "name": "Only Connect to Peer",
+      "description": "Connect only to the specified node(s); can be set multiple times. Set to 0 to disable automatic connections.",
+      "default": ""
+    },
+    "discover": {
+      "name": "Discover IP Address",
+      "description": "Discover own IP addresses. If disabled, should be used with -externalip or -proxy.",
+      "default": 1
+    },
+    "dns": {
+      "name": "Allow DNS Lookups",
+      "description": "Allow DNS lookups for -addnode, -seednode and -connect values.",
+      "default": 1
+    },
+    "dnsseed": {
+      "name": "Use DNS Seed",
+      "description": "Query for peer addresses via DNS lookup, if low on addresses.",
+      "default": 1
+    },
+    "enablebip61": {
+      "name": "Enable BIP61",
+      "description": "Send reject messages per BIP61.",
+      "default": 0
+    },
+    "externalip": {
+      "name": "External IP Address",
+      "description": "Specify your own public IP address.",
+      "default": ""
+    },
+    "forcednsseed": {
+      "name": "Force DNS Seed",
+      "description": "Always query for peer addresses via DNS lookup.",
+      "default": 0
+    },
+    "listen": {
+      "name": "Listen for Incoming Connections",
+      "description": "Accept incoming connections from peers.",
+      "default": 1
+    },
+    "listenonion": {
+      "name": "Tor Hidden Service",
+      "description": "Automatically create Tor hidden service.",
+      "default": 1
+    },
+    "maxconnections": {
+      "name": "Max Peer Connections",
+      "description": "Maintain at most N connections to peers.",
+      "default": 125,
+      "min": 0,
+      "max": 250
+    },
+    "maxreceivebuffer": {
+      "name": "Max Receive Buffer",
+      "description": "Maximum per-connection receive buffer (KiB).",
+      "default": 5000,
+      "min": 1000
+    },
+    "maxsendbuffer": {
+      "name": "Max Send Buffer",
+      "description": "Maximum per-connection send buffer (KiB).",
+      "default": 1000,
+      "min": 100
+    },
+    "maxtimeadjustment": {
+      "name": "Max Time Adjustment",
+      "description": "Maximum allowed median peer time offset adjustment in seconds. Local perspective of time may be influenced by peers forward or backward by this amount.",
+      "default": 4200,
+      "min": 0
+    },
+    "onion": {
+      "name": "Tor Proxy",
+      "description": "Use separate SOCKS5 proxy <ip:port> to reach peers via Tor hidden services.",
+      "default": ""
+    },
+    "onlynet": {
+      "name": "Only Use Specific Network",
+      "description": {
+        "any": "Use every available network",
+        "ipv4": "Only connect to peers via IPV4",
+        "ipv6": "Only connect to peers via IPV6.",
+        "onion": "Only connect to peers via Tor."
+      },
+      "default": "any",
+      "values": [
+        "Any [any]",
+        "IPV4 [ipv4]",
+        "IPV6 [ipv6]",
+        "Tor [onion]"
+      ]
+    },
+    "peerbloomfilters": {
+      "name": "Permit Peer Bloom Filters",
+      "description": "Support filtering of blocks and transactions with bloom filters.",
+      "default": 1
+    },
+    "peertimeout": {
+      "name": "Peer Timeout",
+      "description": "Specify p2p connection timeout in seconds. The amount of time a peer may be inactive before the connection to it is dropped.",
+      "default": 60,
+      "min": 1
+    },
+    "port": {
+      "name": "Listen Port",
+      "description": "Listen for incoming connections on non-default port.",
+      "default": ""
+    },
+    "proxy": {
+      "name": "Proxy Connection",
+      "description": "Connect through <ip:port> SOCKS5 proxy.",
+      "default": ""
+    },
+    "proxyrandomize": {
+      "name": "Randomize Proxy",
+      "description": "Randomize credentials for every proxy connection. This enables Tor stream isolation.",
+      "default": 1
+    },
+    "seednode": {
+      "name": "Seed Node",
+      "description": "Connect to a node (IP address) to retrieve peer addresses, then disconnect.",
+      "default": ""
+    },
+    "timeout": {
+      "name": "Connection Timeout",
+      "description": "Initial peer connection timeout in milliseconds.",
+      "default": 5000,
+      "min": 1
+    },
+    "torcontrol": {
+      "name": "Tor Control",
+      "description": "Tor control <ip:port> to use if onion listening enabled.",
+      "default": "127.0.0.1:9051"
+    },
+    "torpassword": {
+      "name": "Tor Control Password",
+      "description": "Tor control port password.",
+      "default": ""
+    },
+    "upnp": {
+      "name": "Universal Plug 'n Play",
+      "description": "Use UPnP to map the listening port.",
+      "default": 0
+    },
+    "whitebind": {
+      "name": "Whitelist Bound IP Address",
+      "description": "Bind to given address and whitelist peers connecting to it. Use [host]:port notation for IPv6. Use [permissions]address for permissions. Allowed permissions are bloomfilter, noban, forcerelay, relay, and mempool. Specify multiple permissions separated by commas (default: noban,mempool,relay). Can be specified multiple times.",
+      "default": ""
+    },
+    "whitelist": {
+      "name": "Whitelist Peer",
+      "description": "Whitelist peers connecting from the given IP address (e.g. 1.2.3.4) or CIDR notated network (e.g. 1.2.3.0/24). Use [permissions]address for permissions. Uses same permissions as Whitelist Bound IP Address. Can be specified multiple times. Whitelisted peers cannot be DoS banned and their transactions are always relayed, even if they are already in the mempool. Useful for a gateway node.",
+      "default": ""
+    },
+    "maxuploadtarget": {
+      "name": "Max Upload Target",
+      "description": "Tries to keep outbound traffic under the given target (in MiB per 24h), 0 = no limit.",
+      "default": 0,
+      "min": 0
+    }
+  },
+  "zeromq": {
+    "section": "ZeroMQ",
+    "description": "Options for handling notifications emitted via ZeroMQ.",
+    "zmqpubhashblock": {
+      "name": "Publish Block Hashes",
+      "description": "Enable publishing of block hashes to <address>.",
+      "default": ""
+    },
+    "zmqpubhashtx": {
+      "name": "Publish Transaction Hashes",
+      "description": "Enable publishing of transaction hashes to <address>.",
+      "default": ""
+    },
+    "zmqpubrawblock": {
+      "name": "Publish Raw Blocks",
+      "description": "Enable publishing of raw block hex to <address>.",
+      "default": ""
+    },
+    "zmqpubrawtx": {
+      "name": "Publish Raw Transactions",
+      "description": "Enable publishing of raw transaction hex to <address>.",
+      "default": ""
+    },
+    "zmqpubhashblockhwm": {
+      "name": "Publish Block Hashes High Water Mark",
+      "description": "Set publish hash block outbound message high water mark.",
+      "default": 1000
+    },
+    "zmqpubhashtxhwm": {
+      "name": "Publish Transaction Hashes High Water Mark",
+      "description": "Set publish hash transaction outbound message high water mark.",
+      "default": 1000
+    },
+    "zmqpubrawblockhwm": {
+      "name": "Publish Raw Blocks High Water Mark",
+      "description": "Set publish raw block outbound message high water mark.",
+      "default": 1000
+    },
+    "zmqpubrawtxhwm": {
+      "name": "Publish Raw Transactions High Water Mark",
+      "description": "Set publish raw transaction outbound message high water mark.",
+      "default": 1000
+    }
+  },
+  "debug": {
+    "section": "Debugging & Testing",
+    "description": "Features that help developers who are testing changes to Beyondcoin Core.",
+    "uacomment": {
+      "name": "User Agent Comment",
+      "description": "Append comment to the user agent string.",
+      "default": ""
+    },
+    "addrmantest": {
+      "name": "Address Manager Test",
+      "description": "Allows you to test address relay on localhost.",
+      "default": 0
+    },
+    "checkblocks": {
+      "name": "Check Blocks",
+      "description": "How many recent blocks to check at startup.",
+      "default": 6,
+      "min": 0
+    },
+    "checklevel": {
+      "name": "Check Block Level",
+      "description": "How thorough the block verification of -checkblocks is (0-4).",
+      "default": 3,
+      "min": 0,
+      "max": 4
+    },
+    "checkmempool": {
+      "name": "Check Mempool",
+      "description": "Run checks every <n> transactions.",
+      "default": 0,
+      "min": 0
+    },
+    "checkpoints": {
+      "name": "Enable Checkpoints",
+      "description": "Disable expensive verification for known chain history.",
+      "default": 1
+    },
+    "dropmessagestest": {
+      "name": "Test Dropped Messages",
+      "description": "Randomly drop 1 of every <n> network messages.",
+      "default": ""
+    },
+    "dbcrashratio": {
+      "name": "DB Crash Ratio",
+      "description": "Randomly crash while writing data at a given rate between 0 and 1.",
+      "default": 0,
+      "min": 0,
+      "max": 1
+    },
+    "stopafterblockimport": {
+      "name": "Stop After Block Import",
+      "description": "Stop running after importing blocks from disk.",
+      "default": 0
+    },
+    "stopatheight": {
+      "name": "Stop At Height",
+      "description": "Stop running after reaching the given height in the main chain.",
+      "default": 0
+    },
+    "limitancestorcount": {
+      "name": "Limit Transaction Ancestor Count",
+      "description": "Do not accept transactions if number of in-mempool ancestors is <n> or more.",
+      "default": 25,
+      "min": 0
+    },
+    "limitancestorsize": {
+      "name": "Limit Transaction Ancestor Size",
+      "description": "Do not accept transactions whose size with all in-mempool ancestors exceeds <n> kilobytes.",
+      "default": 101,
+      "min": 0
+    },
+    "limitdescendantcount": {
+      "name": "Limit Transaction Descendant Count",
+      "description": "Do not accept transactions if any ancestor would have <n> or more in-mempool descendants.",
+      "default": 25,
+      "min": 0
+    },
+    "limitdescendantsize": {
+      "name": "Limit Transaction Descendant Size",
+      "description": "Do not accept transactions whose size with all in-mempool descendants exceeds <n> kilobytes.",
+      "default": 101,
+      "min": 0
+    },
+    "vbparams": {
+      "name": "Version Bits Deployment Params",
+      "description": "Use given start/end times for specified version bits deployment. Regtest mode only, in format <deployment:start:end>. Can be set multiple times.",
+      "default": ""
+    },
+    "debug": {
+      "name": "Debug Logging",
+      "description": {
+        "0": "Disable debug logging.",
+        "1": "Enable debug logging for all categories.",
+        "addrman": "Enable address manager logging.",
+        "alert": "Enable alert logging",
+        "bench": "Enable benchmark logging",
+        "cmpctblock": "Enable compact block logging",
+        "coindb": "Enable coin database logging",
+        "db": "Enable database logging",
+        "http": "Enable HTTP logging",
+        "leveldb": "Enable leveldb logging",
+        "libevent": "Enable libevent logging",
+        "lock": "Enable lock logging",
+        "mempool": "Enable mempool logging",
+        "mempoolrej": "Enable mempool rejection logging",
+        "net": "Enable network logging",
+        "proxy": "Enable proxy logging",
+        "prune": "Enable pruning logging",
+        "rand": "Enable randomness logging",
+        "reindex": "Enable reindexing logging",
+        "rpc": "Enable RPC logging",
+        "selectcoins": "Enable coin selection logging",
+        "tor": "Enable Tor logging",
+        "zmq": "Enable ZeroMQ logging"
+      },
+      "default": "0",
+      "values": [
+        "Disable [0]",
+        "Enable All [1]",
+        "Address Manager [addrman]",
+        "Alerts [alert]",
+        "Benchmarking [bench]",
+        "Compact Blocks [cmpctblock]",
+        "CoinDB [coindb]",
+        "Database [db]",
+        "HTTP [http]",
+        "LevelDB [leveldb]",
+        "LibEvent [libevent]",
+        "Locking [lock]",
+        "Mempool [mempool]",
+        "Mempool Rejection [mempoolrej]",
+        "Networking [net]",
+        "Proxy [proxy]",
+        "Pruning [prune]",
+        "Random [rand]",
+        "Reinding [reindex]",
+        "RPC [rpc]",
+        "Coin Selection [selectcoins]",
+        "Tor [tor]",
+        "ZeroMQ [zmq]"
+      ]
+    },
+    "debugexclude": {
+      "name": "Exclude Debug Logging",
+      "description": {
+        "0": "Don't exclude any logging.",
+        "addrman": "Exclude address manager logging.",
+        "alert": "Exclude alert logging",
+        "bench": "Exclude benchmark logging",
+        "cmpctblock": "Exclude compact block logging",
+        "coindb": "Exclude coin database logging",
+        "db": "Exclude database logging",
+        "http": "Exclude HTTP logging",
+        "leveldb": "Exclude leveldb logging",
+        "libevent": "Exclude libevent logging",
+        "lock": "Exclude lock logging",
+        "mempool": "Exclude mempool logging",
+        "mempoolrej": "Exclude mempool rejection logging",
+        "net": "Exclude network logging",
+        "proxy": "Exclude proxy logging",
+        "prune": "Exclude pruning logging",
+        "rand": "Exclude randomness logging",
+        "reindex": "Exclude reindexing logging",
+        "rpc": "Exclude RPC logging",
+        "selectcoins": "Exclude coin selection logging",
+        "tor": "Exclude Tor logging",
+        "zmq": "Exclude ZeroMQ logging"
+      },
+      "default": "0",
+      "values": [
+        "No Exclusions [0]",
+        "Address Manager [addrman]",
+        "Alerts [alert]",
+        "Benchmarking [bench]",
+        "Compact Blocks [cmpctblock]",
+        "CoinDB [coindb]",
+        "Database [db]",
+        "HTTP [http]",
+        "LevelDB [leveldb]",
+        "LibEvent [libevent]",
+        "Locking [lock]",
+        "Mempool [mempool]",
+        "Mempool Rejection [mempoolrej]",
+        "Networking [net]",
+        "Proxy [proxy]",
+        "Pruning [prune]",
+        "Random [rand]",
+        "Reinding [reindex]",
+        "RPC [rpc]",
+        "Coin Selection [selectcoins]",
+        "Tor [tor]",
+        "ZeroMQ [zmq]"
+      ]
+    },
+    "debuglogfile": {
+      "name": "Debug Log File",
+      "description": "Location of the debug log",
+      "default": "$BASE/debug.log"
+    },
+    "logips": {
+      "name": "Log IP Addresses",
+      "description": "Log IP Addresses in debug output.",
+      "default": 0
+    },
+    "logthreadnames": {
+      "name": "Log Threadnames",
+      "description": "Prepend debug output with name of the originating thread (only available on platforms supporting thread_local)",
+      "default": 0
+    },
+    "logtimestamps": {
+      "name": "Log Timestamps",
+      "description": "Log timestamps in debug output.",
+      "default": 1
+    },
+    "logtimemicros": {
+      "name": "Log Precise Timestamps",
+      "description": "Log timestamps with microsecond precision.",
+      "default": 0
+    },
+    "mocktime": {
+      "name": "Mock Timestamps",
+      "description": "Replace actual time with <n> seconds since epoch.",
+      "default": 0
+    },
+    "maxsigcachesize": {
+      "name": "Max Signature Cache Size",
+      "description": "Limit size of signature cache to <n> MiB.",
+      "default": 32,
+      "min": 1
+    },
+    "maxtipage": {
+      "name": "Max Age of Chain Tip",
+      "description": "Maximum tip age in seconds to consider node in initial block download.",
+      "default": 86400,
+      "min": 0
+    },
+    "maxtxfee": {
+      "name": "Max Transaction Fee",
+      "description": "Maximum total fees (in BYND) to use in a single wallet transaction or raw transaction; setting this too low may abort large transactions.",
+      "default": 0.1,
+      "min": 0
+    },
+    "printtoconsole": {
+      "name": "Output to Console",
+      "description": "Send trace/debug info to console instead of debug.log.",
+      "default": 0
+    },
+    "printpriority": {
+      "name": "Print Priority",
+      "description": "Log transaction fee per kB when mining blocks.",
+      "default": 0
+    },
+    "promiscuousmempoolflags": {
+      "name": "Script Verification Flags",
+      "description": "Integer representing the script verification flags to enable (all ORed together) - flags can be found in interpreter.h.",
+      "default": ""
+    },
+    "shrinkdebugfile": {
+      "name": "Shrink Debug Log File",
+      "description": "Shrink debug.log file on client startup.",
+      "default": 1
+    },
+    "chain": {
+      "name": "Chain",
+      "description": "Run this node on the given network.",
+      "description": {
+        "main": "Main Network",
+        "test": "Test Network.",
+        "regtest": "Regression Test Network"
+      },
+      "default": "main",
+      "values": [
+        "Mainnet [main]",
+        "Testnet [test]",
+        "Regtest [regtest]"
+      ]
+    },
+    "testnet": {
+      "name": "Testnet",
+      "description": "Run this node on the Beyondcoin Test Network. Equivalent to -chain=test",
+      "default": 0
+    },
+    "regtest": {
+      "name": "Regtest",
+      "description": "Run this node on its own independent test network. Equivalent to -chain=regtest",
+      "default": 0
+    },
+    "segwitheight": {
+      "name": "SegWit Height",
+      "description": "Set the activation height of segwit. -1 to disable. (regtest-only)",
+      "default": 0
+    }
+  },
+  "relay": {
+    "section": "Transaction Relay",
+    "description": "Fine tune settings for what transactions your node will relay to peers.",
+    "acceptnonstdtxn": {
+      "name": "Accept Non-Standard Transactions",
+      "description": "Relay and mine non-standard transactions (testnet/regtest only.)",
+      "default": 0
+    },
+    "incrementalrelayfee": {
+      "name": "Incremental Relay Fee",
+      "description": "Fee rate (in BYND/kB) used to define cost of relay, used for mempool limiting and BIP 125 replacement.",
+      "default": 0.00001,
+      "min": 0
+    },
+    "dustrelayfee": {
+      "name": "Dust Relay Fee",
+      "description": "Fee rate (in BYND/kB) used to defined dust, the value of an output such that it will cost about 1/3 of its value in fees at this fee rate to spend it.",
+      "default": 0.00001,
+      "min": 0
+    },
+    "bytespersigop": {
+      "name": "Bytes Per Signature Operation",
+      "description": "Equivalent bytes per sigop in transactions for relay and mining.",
+      "default": 20,
+      "min": 1
+    },
+    "datacarrier": {
+      "name": "Relay OP_RETURN Transactions",
+      "description": "Relay transactions with OP_RETURN outputs.",
+      "default": 1
+    },
+    "datacarriersize": {
+      "name": "Max OP_RETURN Size",
+      "description": "Maximum size of data in OP_RETURN outputs we relay and mine.",
+      "default": 83,
+      "min": 1
+    },
+    "permitbaremultisig": {
+      "name": "Permit Bare Multisig",
+      "description": "Relay non-P2SH multisig transactions.",
+      "default": 1
+    },
+    "minrelaytxfee": {
+      "name": "Min Transaction Relay Fee",
+      "description": "Fee rates (in BYND/kB) smaller than this are considered zero fee for relaying, mining and transaction creation.",
+      "default": 0.00001,
+      "min": 0
+    },
+    "whitelistrelay": {
+      "name": "Whitelist Relay",
+      "description": "Accept relayed transactions received from whitelisted peers even when not relaying transactions.",
+      "default": 1
+    },
+    "whitelistforcerelay": {
+      "name": "Whitelist Force Relay",
+      "description": "Force relay of transactions from whitelisted peers even if they violate local relay policy.",
+      "default": 1
+    }
+  },
+  "mining": {
+    "section": "Mining",
+    "description": "Configure attributes of blocks that can be mined by this node.",
+    "blockmaxweight": {
+      "name": "Max Block Weight",
+      "description": "Set maximum BIP141 block weight.",
+      "default": 3000000
+    },
+    "blockmintxfee": {
+      "name": "Block Min Transaction Fee",
+      "description": "Set lowest fee rate (in BYND/kB) for transactions to be included in block creation.",
+      "default": 0.00001,
+      "min": 0
+    },
+    "blockversion": {
+      "name": "Block Version",
+      "description": "Override block version to test forking scenarios.",
+      "default": ""
+    }
+  },
+  "rpc": {
+    "section": "RPC API",
+    "description": "Configure security and performance options for accessing the node's RPC interface.",
+    "deprecatedrpc": {
+      "name": "Enable Deprecated RPC Commands",
+      "description": {
+        "accounts": "Enable Accounts RPC",
+        "addwitnessaddress": "Enable Add Witness Address RPC",
+        "signrawtransaction": "Enable Sign Raw Transaction RPC",
+        "validateaddress": "Enable Validate Address RPC"
+      },
+      "default": [],
+      "values": [
+        "Accounts [accounts]",
+        "Add Witness Address [addwitnessaddress]",
+        "Sign Raw Transaction [signrawtransaction]",
+        "Validate Address [validateaddress]"
+      ]
+    },
+    "server": {
+      "name": "Enable RPC Server",
+      "description": "Accept command line and JSON-RPC commands.",
+      "default": 0
+    },
+    "rest": {
+      "name": "Enable REST API",
+      "description": "Accept public REST requests.",
+      "default": 0
+    },
+    "rpcbind": {
+      "name": "Bind RPC Address",
+      "description": "Bind to given address to listen for JSON-RPC connections. This option is ignored unless -rpcallowip is also passed. Port is optional and overrides -rpcport. Use [host]:port notation for IPv6. This option can be specified multiple times. (default: 127.0.0.1 and ::1 i.e., localhost, or if -rpcallowip has been specified, 0.0.0.0 and :: i.e., all addresses)",
+      "default": ""
+    },
+    "rpccookiefile": {
+      "name": "RPC Cookie Directory",
+      "description": "Location of the RPC auth cookie",
+      "default": ".cookie"
+    },
+    "rpcauth": {
+      "name": "RPC Auth",
+      "description": "Username and hashed password for JSON-RPC connections. The field <userpw> comes in the format: <USERNAME>:<SALT>$<HASH>. RPC clients connect using rpcuser=<USERNAME>/rpcpassword=<PASSWORD> arguments. You can generate this value with the ./share/rpcauth/rpcauth.py script in the Beyondcoin Core repository. This option can be specified multiple times.",
+      "default": ""
+    },
+    "rpcport": {
+      "name": "RPC Port",
+      "description": "Listen for JSON-RPC connections on this port",
+      "default": ""
+    },
+    "rpcallowip": {
+      "name": "RPC Allow IP Address",
+      "description": "Allow JSON-RPC connections from specified source. Valid for <ip> are a single IP (e.g. 1.2.3.4), a network/netmask (e.g. 1.2.3.4/255.255.255.0) or a network/CIDR (e.g. 1.2.3.4/24). This option can be specified multiple times.",
+      "default": ""
+    },
+    "rpcthreads": {
+      "name": "RPC Threads",
+      "description": "Set the number of threads to service RPC calls",
+      "default": 4,
+      "min": 1
+    },
+    "rpcworkqueue": {
+      "name": "RPC Work Queue Size",
+      "description": "Set the depth of the work queue to service RPC calls",
+      "default": 16,
+      "min": 1
+    },
+    "rpcserialversion": {
+      "name": "RPC Serialization",
+      "description": {
+        "0": "Return raw transaction or block hex with non-SegWit serialization.",
+        "1": "Return raw transaction or block hex with SegWit serialization."
+      },
+      "default": "1",
+      "values": [
+        "Non-SegWit [0]",
+        "SegWit [1]"
+      ]
+    },
+    "rpcservertimeout": {
+      "name": "RPC Timeout",
+      "description": "Number of seconds after which an uncompleted RPC call will time out",
+      "default": 30,
+      "min": 1
+    }
+  },
+  "wallet": {
+    "section": "Wallet",
+    "description": "Configure behavior of the node's wallet.",
+    "addresstype": {
+      "name": "Address Type",
+      "description": {
+        "legacy": "Legacy",
+        "p2sh-segwit": "P2SH Wrapped SegWit",
+        "bech32": "Bech32"
+      },
+      "default": "p2sh-segwit",
+      "values": [
+        "Legacy [legacy]",
+        "P2SH Wrapped SegWit [p2sh-segwit]",
+        "Bech32 [bech32]"
+      ]
+    },
+    "avoidpartialspends": {
+      "name": "Avoid Partial Spends",
+      "description": "Group outputs by address, selecting all or none, instead of selecting on a per-output basis. Improves privacy at expense of higher transaction fees.",
+      "default": 0
+    },
+    "changetype": {
+      "name": "Change Address Type",
+      "description": {
+        "legacy": "Legacy",
+        "p2sh-segwit": "P2SH Wrapped SegWit",
+        "bech32": "Bech32"
+      },
+      "default": "p2sh-segwit",
+      "values": [
+        "Legacy [legacy]",
+        "P2SH Wrapped SegWit [p2sh-segwit]",
+        "Bech32 [bech32]"
+      ]
+    },
+    "disablewallet": {
+      "name": "Disable Wallet",
+      "description": "Do not load the wallet and disable wallet RPC calls.",
+      "default": 0
+    },
+    "keypool": {
+      "name": "Key Pool Size",
+      "description": "Set key pool size to <n>. Recommended to use a large number for high volume non-HD wallets.",
+      "default": 1000,
+      "min": 10
+    },
+    "fallbackfee": {
+      "name": "Fallback Transaction Fee",
+      "description": "A fee rate (in BYND/kB) that will be used when fee estimation has insufficient data",
+      "default": 0.0002,
+      "min": 0
+    },
+    "discardfee": {
+      "name": "Discard Change Fee",
+      "description": "The fee rate (in BYND/kB) that indicates your tolerance for discarding change by adding it to the fee",
+      "default": 0.0001,
+      "min": 0
+    },
+    "mintxfee": {
+      "name": "Min Transaction Fee",
+      "description": "Fee rates (in BYND/kB) smaller than this are considered zero fee for transaction creation",
+      "default": 0.00001,
+      "min": 0
+    },
+    "paytxfee": {
+      "name": "Pay Transaction Fee",
+      "description": "Fee rate (in BYND/kB) to add to transactions you send. Not recommended to set!",
+      "default": 0
+    },
+    "rescan": {
+      "name": "Rescan Wallet",
+      "description": "Rescan the blockchain for missing wallet transactions on startup. WARNING: very slow!",
+      "default": 0
+    },
+    "salvagewallet": {
+      "name": "Salvage Wallet",
+      "description": "Attempt to recover private keys from a corrupt wallet on startup.",
+      "default": 0
+    },
+    "spendzeroconfchange": {
+      "name": "Spend Unconfirmed Change",
+      "description": "Spend unconfirmed change when sending transactions.",
+      "default": 1
+    },
+    "rootcertificates": {
+      "name": "Root Certificate file",
+      "description": "Specify a custom root certificate to trust for payment requests. Delete value to disable trusting root certificates.",
+      "default": "-system-"
+    },
+    "txconfirmtarget": {
+      "name": "Transaction Fee Confirmation Target",
+      "description": "If paytxfee is not set, include enough fee so that transactions should confirm within <n> blocks",
+      "default": 6,
+      "min": 2,
+      "max": 25
+    },
+    "walletrbf": {
+      "name": "Enable Replace By Fee Transactions",
+      "description": "Send transactions with full-RBF opt-in enabled.",
+      "default": 1
+    },
+    "upgradewallet": {
+      "name": "Upgrade Wallet Automatically",
+      "description": "Upgrade wallet to latest format on startup.",
+      "default": 1
+    },
+    "wallet": {
+      "name": "Wallet Path",
+      "description": "Specify wallet database path. Can be specified multiple times to load multiple wallets. Path is interpreted relative to <walletdir> if it is not absolute and will be created if it does not exist.",
+      "default": ""
+    },
+    "walletdir": {
+      "name": "Wallet Data Storage Location",
+      "description": "Specify a non-default location to store wallet data.",
+      "default": "$BASE/wallets"
+    },
+    "walletbroadcast": {
+      "name": "Broadcast Transactions",
+      "description": "Broadcast transactions created by the wallet.",
+      "default": 1
+    },
+    "walletnotify": {
+      "name": "Wallet Notification",
+      "description": "Execute command when a wallet transaction changes (%s in cmd is replaced by TxID)",
+      "default": ""
+    },
+    "zapwallettxes": {
+      "name": "Zap Wallet Transactions",
+      "description": "Delete all wallet transactions and only recover those parts of the blockchain through -rescan on startup. Value of 1 = keep tx meta data e.g. account owner and payment request information, 2 = drop tx meta data.",
+      "default": ""
+    },
+    "dblogsize": {
+      "name": "DB Log Size",
+      "description": "Flush wallet database activity from memory to disk log every <n> megabytes",
+      "default": 100
+    },
+    "flushwallet": {
+      "name": "Flush Wallet Automatically",
+      "description": "Run a thread to flush wallet periodically.",
+      "default": 1
+    },
+    "privdb": {
+      "name": "Private DB",
+      "description": "Set the DB_PRIVATE flag in the wallet db environment.",
+      "default": 1
+    },
+    "walletrejectlongchains": {
+      "name": "Reject Long Transaction Chains",
+      "description": "Wallet will not create transactions that violate mempool chain limits.",
+      "default": 1
+    }
+  }
+}

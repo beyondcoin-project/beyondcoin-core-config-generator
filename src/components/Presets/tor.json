@@ -1,0 +1,12 @@
+{
+  "network": {
+  	"bind": "127.0.0.1:10333",
+  	"externalip": "your_tor_address.onion",
+    "listenonion": 1,
+    "onion": 1,
+    "onlynet": "onion",
+    "proxyrandomize": 1,
+    "torcontrol": "127.0.0.1:9051",
+    "torpassword": ""
+  }
+}
