@@ -1,6 +1,6 @@
 # Beyondcoin Core Config Generator
 
-[![Build Status](https://travis-ci.org/beyondcoin=project/beyondcoin-core-config-generator.svg?branch=master)](https://travis-ci.org/jlopp/beyondcoin-core-config-generator) An online generator is [available here](https://config.beyondcoin.io)
+[![Build Status](https://travis-ci.org/beyondcoin=project/beyondcoin-core-config-generator.svg?branch=master)](https://travis-ci.org/jlopp/beyondcoin-core-config-generator) An online generator is [available here](http://config.beyondcoin.io)
 
 What is this?
 -------------
